@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'animated_markdown.dart';
 import 'animations.dart';
 import 'separator.dart';
 import 'tokenized_text.dart';

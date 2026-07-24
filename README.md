@@ -39,4 +39,4 @@ AnimatedMarkdown(
 
 ## License
 
-MIT — see [FlowToken](https://github.com/Ephibbs/flowtoken) for the original concept.
+ISC — see [FlowToken](https://github.com/Ephibbs/flowtoken) for the original concept.

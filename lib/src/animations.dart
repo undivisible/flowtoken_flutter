@@ -24,7 +24,7 @@ extension FlowTokenAnimationX on FlowTokenAnimation {
         FlowTokenAnimation.blurAndSharpen => const Duration(milliseconds: 550),
       };
 
-  Curve get defaultCurve => Curves.easeInOut;
+  Curve get defaultCurve => Curves.easeOutCubic;
 
   /// Builds a transition for a newly revealed token span.
   Widget transition({
