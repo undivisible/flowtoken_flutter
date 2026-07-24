@@ -1,0 +1,21 @@
+name: flowtoken_flutter
+description: >-
+  Flutter port of FlowToken — smooth animations for streaming LLM text and
+  markdown. Inspired by https://github.com/Ephibbs/flowtoken
+version: 0.1.0
+homepage: https://github.com/undivisible/flowtoken_flutter
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  gpt_markdown: ^1.1.8
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
