@@ -1,4 +1,5 @@
 .dart_tool/
 .flutter-plugins-dependencies
+.wrangler/
 build/
 pubspec.lock
