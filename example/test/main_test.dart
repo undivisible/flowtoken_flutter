@@ -24,7 +24,7 @@ void main() {
     }
 
     expect(find.text('FlowToken '), findsOneWidget);
-    expect(find.text('fragments.'), findsOneWidget);
+    expect(find.text('generation.'), findsOneWidget);
     expect(
       tester
           .widgetList<Text>(find.byType(Text))

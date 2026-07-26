@@ -5,13 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const _message =
-    'FlowToken is a Flutter library for the moment an LLM reply becomes '
-    'visible: each arriving word settles into place instead of flashing, '
-    'jumping, or forcing the reader to wait for a completed message. It keeps '
-    'live responses calm and legible while the model is still thinking, works '
-    'with plain text and Markdown, and gives streaming interfaces the kind of '
-    'deliberate motion that makes a conversation feel continuous rather than '
-    'assembled in fragments.';
+    'FlowToken Flutter is a text visualization library to animate and smooth '
+    'streaming LLM token generation.';
 
 final _streamTokens = RegExp(
   r'\S+\s*',
@@ -97,7 +92,7 @@ class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
                         content: _streamTokens.take(_tokenCount).join(),
                         separator: FlowTokenSeparator.diff,
                         animation: FlowTokenAnimation.fadeIn,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           height: 1.5,
                           color: Colors.white,
                         ),
