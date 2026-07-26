@@ -7,9 +7,9 @@ import 'package:url_launcher/url_launcher.dart';
 const _message =
     'Max Carter makes things for people—compilers, runtimes, operating '
     'systems, and native tools that make complicated systems feel direct. '
-    'FlowToken Flutter is part of that work: a small text visualization '
-    'library for turning live LLM output into something calm, readable, and '
-    'continuous while it is still arriving.';
+    'FlowToken Flutter is a Flutter port of Ephibbs’ original FlowToken: a '
+    'small text visualization library for turning live LLM output into '
+    'something calm, readable, and continuous while it is still arriving.';
 
 final _streamTokens = RegExp(
   r'\S+\s*',
