@@ -163,13 +163,14 @@ class _AnimatedTokenState extends State<_AnimatedToken>
           child: Text(
             widget.text,
             style: _styleWithColor(),
+            softWrap: false,
           ),
         ),
       );
     }
     return widget.animation.transition(
       animation: _controller,
-      child: Text(widget.text, style: widget.style),
+      child: Text(widget.text, style: widget.style, softWrap: false),
       curve: widget.curve,
     );
   }

@@ -5,8 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const _message =
-    'FlowToken brings gentle, token-by-token motion to streamed LLM text and '
-    'Markdown in Flutter.';
+    'FlowToken is a Flutter library for the moment an LLM reply becomes '
+    'visible: each arriving word settles into place instead of flashing, '
+    'jumping, or forcing the reader to wait for a completed message. It keeps '
+    'live responses calm and legible while the model is still thinking, works '
+    'with plain text and Markdown, and gives streaming interfaces the kind of '
+    'deliberate motion that makes a conversation feel continuous rather than '
+    'assembled in fragments.';
+
+final _streamTokens = RegExp(
+  r'\S+\s*',
+).allMatches(_message).map((match) => match.group(0)!).toList(growable: false);
 
 void main() => runApp(const FlowTokenDemo());
 
@@ -35,7 +44,7 @@ class FlowTokenDemoPage extends StatefulWidget {
 
 class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
   Timer? _timer;
-  var _cursor = 0;
+  var _tokenCount = 0;
 
   @override
   void initState() {
@@ -53,18 +62,15 @@ class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
 
   void _stream() {
     if (MediaQuery.disableAnimationsOf(context)) {
-      setState(() => _cursor = _message.length);
+      setState(() => _tokenCount = _streamTokens.length);
       return;
     }
-    _timer = Timer.periodic(const Duration(milliseconds: 36), (timer) {
-      if (!mounted || _cursor >= _message.length) {
+    _timer = Timer.periodic(const Duration(milliseconds: 58), (timer) {
+      if (!mounted || _tokenCount >= _streamTokens.length) {
         timer.cancel();
         return;
       }
-      setState(() {
-        final next = _cursor + 3;
-        _cursor = next > _message.length ? _message.length : next;
-      });
+      setState(() => _tokenCount++);
     });
   }
 
@@ -79,7 +85,7 @@ class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               AnimatedText(
-                content: _message.substring(0, _cursor),
+                content: _streamTokens.take(_tokenCount).join(),
                 separator: FlowTokenSeparator.diff,
                 animation: FlowTokenAnimation.fadeIn,
                 alignment: WrapAlignment.center,
