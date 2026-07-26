@@ -23,6 +23,26 @@ void main() {
     expect(find.text('Hello'), findsOneWidget);
     expect(find.text(' world'), findsOneWidget);
   });
+
+  testWidgets('supports every upstream animation', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Wrap(
+            children: [
+              for (final animation in FlowTokenAnimation.values)
+                AnimatedText(content: animation.name, animation: animation),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    expect(FlowTokenAnimation.values, hasLength(14));
+    expect(find.text('wave'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
 }
 
 class _DiffHarness extends StatelessWidget {

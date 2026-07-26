@@ -11,6 +11,8 @@ class AnimatedText extends StatelessWidget {
     this.separator = FlowTokenSeparator.diff,
     this.animation = FlowTokenAnimation.fadeIn,
     this.duration,
+    this.curve,
+    this.animationIterationCount = 1,
     this.style,
     super.key,
   });
@@ -19,6 +21,8 @@ class AnimatedText extends StatelessWidget {
   final FlowTokenSeparator separator;
   final FlowTokenAnimation? animation;
   final Duration? duration;
+  final Curve? curve;
+  final int animationIterationCount;
   final TextStyle? style;
 
   @override
@@ -31,6 +35,8 @@ class AnimatedText extends StatelessWidget {
       separator: separator,
       animation: animation!,
       duration: duration,
+      curve: curve,
+      animationIterationCount: animationIterationCount,
       style: style,
     );
   }

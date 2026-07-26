@@ -20,6 +20,8 @@ class TokenizedText extends StatefulWidget {
     this.separator = FlowTokenSeparator.diff,
     this.animation = FlowTokenAnimation.fadeIn,
     this.duration,
+    this.curve,
+    this.animationIterationCount = 1,
     this.style,
     super.key,
   });
@@ -28,6 +30,8 @@ class TokenizedText extends StatefulWidget {
   final FlowTokenSeparator separator;
   final FlowTokenAnimation animation;
   final Duration? duration;
+  final Curve? curve;
+  final int animationIterationCount;
   final TextStyle? style;
 
   @override
@@ -93,6 +97,8 @@ class _TokenizedTextState extends State<TokenizedText> {
             text: token.text,
             animation: widget.animation,
             duration: duration,
+            curve: widget.curve,
+            animationIterationCount: widget.animationIterationCount,
             style: widget.style,
           ),
       ],
@@ -105,6 +111,8 @@ class _AnimatedToken extends StatefulWidget {
     required this.text,
     required this.animation,
     required this.duration,
+    required this.curve,
+    required this.animationIterationCount,
     this.style,
     super.key,
   });
@@ -112,6 +120,8 @@ class _AnimatedToken extends StatefulWidget {
   final String text;
   final FlowTokenAnimation animation;
   final Duration duration;
+  final Curve? curve;
+  final int animationIterationCount;
   final TextStyle? style;
 
   @override
@@ -121,17 +131,16 @@ class _AnimatedToken extends StatefulWidget {
 class _AnimatedTokenState extends State<_AnimatedToken>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: widget.animation.defaultCurve,
-    );
-    unawaited(_controller.forward());
+    if (widget.animationIterationCount > 1) {
+      unawaited(_controller.repeat(count: widget.animationIterationCount));
+    } else {
+      unawaited(_controller.forward());
+    }
   }
 
   @override
@@ -142,10 +151,38 @@ class _AnimatedTokenState extends State<_AnimatedToken>
 
   @override
   Widget build(BuildContext context) {
-    final child = Text(widget.text, style: widget.style);
+    if (widget.animation == FlowTokenAnimation.highlight ||
+        widget.animation == FlowTokenAnimation.colorTransition) {
+      return AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) => widget.animation.transition(
+          animation: _controller,
+          curve: widget.curve,
+          child: Text(
+            widget.text,
+            style: _styleWithColor(),
+          ),
+        ),
+      );
+    }
     return widget.animation.transition(
-      animation: _animation,
-      child: child,
+      animation: _controller,
+      child: Text(widget.text, style: widget.style),
+      curve: widget.curve,
     );
+  }
+
+  TextStyle _styleWithColor() {
+    final color = widget.animation.colorAt(
+      _controller,
+      widget.curve ?? widget.animation.defaultCurve,
+    );
+    return switch (widget.animation) {
+      FlowTokenAnimation.highlight =>
+        (widget.style ?? const TextStyle()).copyWith(backgroundColor: color),
+      FlowTokenAnimation.colorTransition =>
+        (widget.style ?? const TextStyle()).copyWith(color: color),
+      _ => widget.style ?? const TextStyle(),
+    };
   }
 }

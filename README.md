@@ -37,7 +37,9 @@ AnimatedMarkdown(
 
 ## Animations
 
-`fadeIn`, `blurIn`, `dropIn`, `slideUp`, `slideInFromLeft`, `fadeAndScale`, `blurAndSharpen`
+`fadeIn`, `blurIn`, `typewriter`, `slideInFromLeft`, `fadeAndScale`, `rotateIn`, `bounceIn`, `elastic`, `colorTransition`, `highlight`, `blurAndSharpen`, `dropIn`, `slideUp`, `wave`
+
+`duration`, `curve`, and `animationIterationCount` are available on `AnimatedText`, `AnimatedMarkdown`, and `AnimatedImage`. `AnimatedMarkdown` also preserves the upstream code-copy and image animation behavior.
 
 ## License
 
