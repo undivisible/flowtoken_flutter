@@ -2,6 +2,8 @@
 
 Flutter port of [FlowToken](https://github.com/Ephibbs/flowtoken) — smooth animations for streaming LLM text and markdown.
 
+Try the interactive Flutter web demo at [flowtoken-flutter.undivisible.dev](https://flowtoken-flutter.undivisible.dev).
+
 Inspired by the original React library; uses [`gpt_markdown`](https://pub.dev/packages/gpt_markdown) for static rendering.
 
 ## Install

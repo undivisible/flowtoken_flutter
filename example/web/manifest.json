@@ -1,0 +1,35 @@
+{
+    "name": "FlowToken Flutter",
+    "short_name": "FlowToken",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0b0d10",
+    "theme_color": "#0b0d10",
+    "description": "Interactive FlowToken Flutter web example.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
