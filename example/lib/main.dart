@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flowtoken_flutter/flowtoken_flutter.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +43,7 @@ class FlowTokenDemoPage extends StatefulWidget {
 }
 
 class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
-  final _random = Random();
   Timer? _timer;
-  var _baseLatencyMilliseconds = 100;
   var _tokenCount = 0;
 
   @override
@@ -73,15 +70,9 @@ class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
 
   void _streamNextToken() {
     if (!mounted || _tokenCount >= _streamTokens.length) return;
-    final delay = _baseLatencyMilliseconds + _random.nextInt(11);
-    _timer = Timer(Duration(milliseconds: delay), () {
+    _timer = Timer(const Duration(milliseconds: 32), () {
       if (!mounted) return;
-      setState(() {
-        _tokenCount++;
-        if (_tokenCount % 10 == 0 && _random.nextBool()) {
-          _baseLatencyMilliseconds += 20;
-        }
-      });
+      setState(() => _tokenCount++);
       _streamNextToken();
     });
   }
@@ -89,48 +80,53 @@ class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: SingleChildScrollView(
+      child: LayoutBuilder(
+        builder: (context, constraints) => SingleChildScrollView(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 760),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(28, 72, 28, 40),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AnimatedText(
-                    content: _streamTokens.take(_tokenCount).join(),
-                    separator: FlowTokenSeparator.diff,
-                    animation: FlowTokenAnimation.fadeIn,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      height: 1.5,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Wrap(
-                    spacing: 4,
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 640),
+                child: Padding(
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextButton(
-                        onPressed: () => launchUrl(
-                          Uri.parse(
-                            'https://github.com/undivisible/flowtoken_flutter',
-                          ),
-                          mode: LaunchMode.externalApplication,
+                      AnimatedText(
+                        content: _streamTokens.take(_tokenCount).join(),
+                        separator: FlowTokenSeparator.diff,
+                        animation: FlowTokenAnimation.fadeIn,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          height: 1.5,
+                          color: Colors.white,
                         ),
-                        child: const Text('GitHub'),
                       ),
-                      TextButton(
-                        onPressed: () => launchUrl(
-                          Uri.parse('https://undivisible.dev'),
-                          mode: LaunchMode.externalApplication,
-                        ),
-                        child: const Text('undivisible.dev'),
+                      const SizedBox(height: 24),
+                      Wrap(
+                        spacing: 4,
+                        children: [
+                          TextButton(
+                            onPressed: () => launchUrl(
+                              Uri.parse(
+                                'https://github.com/undivisible/flowtoken_flutter',
+                              ),
+                              mode: LaunchMode.externalApplication,
+                            ),
+                            child: const Text('GitHub'),
+                          ),
+                          TextButton(
+                            onPressed: () => launchUrl(
+                              Uri.parse('https://undivisible.dev'),
+                              mode: LaunchMode.externalApplication,
+                            ),
+                            child: const Text('undivisible.dev'),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
