@@ -13,6 +13,7 @@ class AnimatedText extends StatelessWidget {
     this.duration,
     this.curve,
     this.animationIterationCount = 1,
+    this.alignment = WrapAlignment.start,
     this.style,
     super.key,
   });
@@ -23,6 +24,7 @@ class AnimatedText extends StatelessWidget {
   final Duration? duration;
   final Curve? curve;
   final int animationIterationCount;
+  final WrapAlignment alignment;
   final TextStyle? style;
 
   @override
@@ -37,6 +39,7 @@ class AnimatedText extends StatelessWidget {
       duration: duration,
       curve: curve,
       animationIterationCount: animationIterationCount,
+      alignment: alignment,
       style: style,
     );
   }

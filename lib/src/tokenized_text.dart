@@ -22,6 +22,7 @@ class TokenizedText extends StatefulWidget {
     this.duration,
     this.curve,
     this.animationIterationCount = 1,
+    this.alignment = WrapAlignment.start,
     this.style,
     super.key,
   });
@@ -32,6 +33,7 @@ class TokenizedText extends StatefulWidget {
   final Duration? duration;
   final Curve? curve;
   final int animationIterationCount;
+  final WrapAlignment alignment;
   final TextStyle? style;
 
   @override
@@ -88,7 +90,7 @@ class _TokenizedTextState extends State<TokenizedText> {
     final tokens = _tokensFor(widget.text);
     final duration = widget.duration ?? widget.animation.defaultDuration;
     return Wrap(
-      alignment: WrapAlignment.start,
+      alignment: widget.alignment,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         for (final token in tokens)
