@@ -115,6 +115,15 @@ class _FlowTokenDemoPageState extends State<FlowTokenDemoPage> {
                           ),
                           TextButton(
                             onPressed: () => launchUrl(
+                              Uri.parse(
+                                'https://pub.dev/packages/flowtoken_flutter',
+                              ),
+                              mode: LaunchMode.externalApplication,
+                            ),
+                            child: const Text('pub.dev'),
+                          ),
+                          TextButton(
+                            onPressed: () => launchUrl(
                               Uri.parse('https://undivisible.dev'),
                               mode: LaunchMode.externalApplication,
                             ),
