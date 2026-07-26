@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const _message =
-    'FlowToken Flutter is a text visualization library to animate and smooth '
-    'streaming LLM token generation.';
+    'Max Carter makes things for people—compilers, runtimes, operating '
+    'systems, and native tools that make complicated systems feel direct. '
+    'FlowToken Flutter is part of that work: a small text visualization '
+    'library for turning live LLM output into something calm, readable, and '
+    'continuous while it is still arriving.';
 
 final _streamTokens = RegExp(
   r'\S+\s*',
